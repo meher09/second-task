@@ -2,6 +2,9 @@
 
 This is a Node.js and Express.js project written in TypeScript. It's designed as a RESTful API to manage user data with functionality like creating, retrieving, updating, and deleting user information.
 
+Live link: https://long-teal-meerkat-shoe.cyclic.app/
+user list: https://long-teal-meerkat-shoe.cyclic.app/api/users
+
 ## Getting Started
 
 These instructions will help you to get the project running on your local machine for development and testing purposes.
