@@ -18,11 +18,23 @@ const findSingleUserInDB = async (userId: number) => {
 };
 
 
+const updateUserInDB = async (userId: number, updatedUserData: any) => {
+    const update = { ...updatedUserData, password: undefined, };
+    const updatedUser = await UserModel.findOneAndUpdate({ userId }, update, { new: true }).select('-password');
+    return updatedUser;
+};
+
+
+
+const deleteUserInDB = async (userId: number) => {
+    const result = await UserModel.updateOne({ userId }, { isDeleted: true });
+    return result;
+};
 
 
 
 
 
 export const UserServices = {
-    createUserIntoDB, findAllUsersInDB, findSingleUserInDB
+    createUserIntoDB, findAllUsersInDB, findSingleUserInDB, updateUserInDB, deleteUserInDB
 };
