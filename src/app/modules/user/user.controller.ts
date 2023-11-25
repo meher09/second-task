@@ -19,11 +19,11 @@ const createUser = async (req: Request, res: Response) => {
             data: userDataWithoutPassword,
         });
     } catch (err) {
-        console.log(err);
+        const error = err as Error;
         res.status(500).json({
             success: false,
             message: 'Error creating user',
-            error: err.message,
+            error: error.message,
         });
     }
 };
@@ -39,11 +39,11 @@ const getAllUsers = async (req: Request, res: Response) => {
             data: users,
         });
     } catch (err) {
-        console.log(err);
+        const error = err as Error;
         res.status(500).json({
             success: false,
             message: 'Error fetching users',
-            error: err.message,
+            error: error.message,
         });
     }
 };
@@ -70,10 +70,11 @@ const getSingleUser = async (req: Request, res: Response) => {
             data: user,
         });
     } catch (err) {
+        const error = err as Error;
         res.status(500).json({
             success: false,
             message: 'Error fetching user',
-            error: err.message,
+            error: error.message,
         });
     }
 };
@@ -115,10 +116,11 @@ const updateUser = async (req: Request, res: Response) => {
             data: userDataWithoutPassword,
         });
     } catch (err) {
+        const error = err as Error;
         res.status(500).json({
             success: false,
             message: 'Error updating user',
-            error: err.message,
+            error: error.message,
         });
     }
 };
