@@ -1,11 +1,15 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
-
-
+import bcrypt from 'bcrypt';
 
 const createUser = async (req: Request, res: Response) => {
     try {
         const userData = req.body.user;
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+
+        // Replace plain password with hashed password
+        userData.password = hashedPassword;
         const newUser = await UserServices.createUserIntoDB(userData);
         const { password, ...userDataWithoutPassword } = newUser.toObject();
 
@@ -29,7 +33,6 @@ const getAllUsers = async (req: Request, res: Response) => {
     try {
         // Fetch all user data from the database. 
         const users = await UserServices.findAllUsersInDB()
-
         res.status(200).json({
             success: true,
             message: 'Users fetched successfully!',
